@@ -1,19 +1,15 @@
-import {
-    Router
-} from "express";
+//! 1) destructure Router from express
+//! 2) call the top level function
+//! 3) export it
 
-import {
-    addUser,
-    getUser
-} from "../controller/user.controller.js";
+import { Router } from "express";
+import { addUser, getUser, getUsers } from "../controller/user.controller.js";
 
+let router = Router();
 
-const router = Router();
+router.post("/add", addUser);
+router.get("/all", getUsers);
 
-router.post("/add", addUser)
-
-router.get("/all", getUser);
-
-
+router.get("/one/:id", getUser); //? ":xyz" ==> params (parameters)
 
 export default router;

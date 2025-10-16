@@ -3,6 +3,7 @@ import express from "express";
 import connectDB from "./config/database.js";
 
 import userRoutes from "./routers/user.routes.js";
+import blogRoutes from "./routers/blog.routes.js";
 
 connectDB();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 
 app.use("/api", userRoutes);
 //? "/api" --> api version
+app.use("/blog", blogRoutes);
 
 app.listen(9000, (err) => {
   if (err) console.log(err);

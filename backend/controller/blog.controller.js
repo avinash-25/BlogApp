@@ -1,23 +1,27 @@
-/*
-* ! controller
-addBlog --> /add
-getBlogs --> /all
-getBlog --> /single/:id
-updateBlog --> /edit:id
-deleteBlog --> /delete/:id
-*/
-
 import blogData from "../Module/blog.model.js";
+import expressAsyncHandler from "express-async-handler";
 
-export const addBlog = async (req, res) => {
-  const { title, description, createdBy } = req.body;
-  let newBlog = await blogData.create({ title, description, createdBy });
-  res
-    .status(201)
-    .json({ success: true, message: "Blog added successfully", newBlog });
-};
+//! add blog
 
-export const getBlogs = async (req, res) => {
+export const addBlog = expressAsyncHandler(async (req, res, next) => {
+  // try {
+  const { title, description, createdby } = req.body;
+  let newBlog = await blogData.create({ title, description, createdby });
+
+  res.status(201).json({
+    success: true,
+    message: "Blog added successfully",
+    newBlog,
+  });
+  // } catch (error) {
+  //   next(error);
+  // }
+});
+
+//! Get all blogs
+
+export const getBlogs = expressAsyncHandler(async (req, res, next) => {
+  // try {
   let blogs = await blogData.find();
 
   if (blogs.length === 0)
@@ -29,9 +33,15 @@ export const getBlogs = async (req, res) => {
     message: "users fetched",
     blogs,
   });
-};
+  // } catch (error) {
+  //   next(error);
+  // }
+});
 
-export const getBlog = async (req, res) => {
+//! Get one blog
+
+export const getBlog = expressAsyncHandler(async (req, res, next) => {
+  // try {
   console.log(req.params);
   let blogID = req.params.id;
   let blogs = await blogData.findById(blogID);
@@ -39,9 +49,15 @@ export const getBlog = async (req, res) => {
   if (!blogs)
     return res.status(404).json({ success: false, message: "No Blog Found" });
   res.status(200).json({ success: true, message: "Blogs found", blogs });
-};
+  // } catch (error) {
+  //   next(error);
+  // }
+});
 
-export const updateBlog = async (req, res) => {
+//! Update blog
+
+export const updateBlog = expressAsyncHandler(async (req, res, next) => {
+  // try {
   let blogID = req.params.id;
 
   let existIngBlog = await blogData.findById(blogID);
@@ -50,12 +66,27 @@ export const updateBlog = async (req, res) => {
 
   let blog = await blogData.updateOne({ _id: blogID }, { $set: req.body });
   res.status(200).json({ success: true, message: "updated", blog });
-};
+  // } catch (error) {
+  //   next(error);
+  // }
+});
 
-export const deleteBlog = async (req, res) => {
+//! delete blog
+
+export const deleteBlog = expressAsyncHandler(async (req, res, next) => {
+  // try {
   let blogID = req.params.id;
 
   let deleteBlog = await blogData.deleteOne({ _id: blogID });
 
   res.status(200).json({ success: true, message: "Blog deleted" }, deleteBlog);
-};
+  // } catch (error) {
+  //   next(error);
+  // }
+});
+
+//! express-async-handler :
+/**
+ * Function wrapper only works for async functions and after using this no need to write try-catch because
+ * error object will be passed on to global error middleware automatically
+ */

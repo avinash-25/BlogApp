@@ -90,3 +90,10 @@ export const deleteBlog = expressAsyncHandler(async (req, res, next) => {
  * Function wrapper only works for async functions and after using this no need to write try-catch because
  * error object will be passed on to global error middleware automatically
  */
+
+//? login --> token (server) --> send this token to client (browser : localStorage, cookies)
+//? add, delete, create --> req + token --> on server side check for token --> if not found --> return error message to client
+//? add, delete, create --> req + token --> on server side check for token --> if found --> check role(authorization) --> if not authorized --> return error message to client
+
+//~ token generation
+//! login --> check for email --> if registered --> check for password --> if correct --> generate token (jwt: generate a token based on some user's data: payload (_id)) --> send token to client in encrypted form

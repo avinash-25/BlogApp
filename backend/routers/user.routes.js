@@ -8,18 +8,28 @@ import {
   deleteUser,
   getUser,
   getUsers,
+  login,
+  logout,
   updateUser,
-} from "../controller/user.controller.js";
+} from "../controllers/user.controller.js";
 
 let router = Router();
 
 router.post("/add", addUser);
 router.get("/all", getUsers);
 
-router.get("/one/:id", getUser); //? ":xyz" ==> params (parameters)
+//! for login
+router.post("/login", login);
+//~ for logout
+router.post("/logout", logout);
 
-router.patch("/update/:id", updateUser);
+router.delete("/:id", deleteUser);
+//? localhost:9000/api/delete/123
 
-router.delete("/delete/:id", deleteUser);
+router.patch("/:id", updateUser);
+//? localhost:9000/api/update/123
+
+router.get("/:id", getUser); //? ":xyz" ==> params (parameters)
+//? localhost:9000/api/one/123 --> :id dynamic routes (greedy routes)
 
 export default router;

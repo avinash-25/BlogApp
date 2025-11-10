@@ -5,17 +5,16 @@ import {
   getBlog,
   getBlogs,
   updateBlog,
-} from "../controller/blog.controller.js";
+} from "../controllers/blog.controller.js";
+import { authentication } from "../middlewares/auth.middleware.js";
 
-let router = Router();
+const router = Router();
 
-router.post("/add", addBlog);
+router.post("/add", authentication, addBlog); //? injecting a middleware
 router.get("/all", getBlogs);
 
 router.get("/one/:id", getBlog);
-
-router.patch("/update/:id", updateBlog);
-
+router.patch("/edit/:id", updateBlog);
 router.delete("/delete/:id", deleteBlog);
 
 export default router;

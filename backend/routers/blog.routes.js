@@ -5,9 +5,9 @@ import {
   getBlog,
   getBlogs,
   updateBlog,
-} from "../controllers/blog.controller.js";
-import { authentication } from "../middlewares/auth.middleware.js";
+} from "../controller/blog.controller.js";
 
+import { authentication } from "../middleware/auth.middleware.js";
 const router = Router();
 
 router.post("/add", authentication, addBlog); //? injecting a middleware

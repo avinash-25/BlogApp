@@ -6,8 +6,6 @@ export async function connectDB() {
   console.log("database connected");
 }
 
-// ? mongodb://localhost:27017/blogApp --> "blogApp" is database name
-
 //? Here we have only defined the connection to the database along with databse name.
 
 //? "mongodb://localhost:27017/blogAPP" --> blogAPP databse name

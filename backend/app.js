@@ -1,3 +1,4 @@
+import errorMiddleware from "./middleware/error.middleware.js";
 import dotenv from "dotenv";
 dotenv.config(); //? this config() will parse all the .env file variables and load them into process.env
 
@@ -11,10 +12,9 @@ import cors from "cors";
 import express from "express";
 
 import { connectDB } from "./config/database.js";
-import { errorMiddleware } from "./middlewares/error.middleware.js";
 
-import blogRoutes from "./routes/blog.routes.js";
-import userRoutes from "./routes/user.routes.js";
+import blogRoutes from "./routers/blog.routes.js";
+import userRoutes from "./routers/user.routes.js";
 
 connectDB();
 

@@ -1,4 +1,4 @@
-import blogModel from "../models/blog.model.js";
+import blogModel from "../Module/blog.model.js";
 import { asyncHandler } from "../utils/catchAsync.util.js";
 
 export const addBlog = asyncHandler(async (req, res) => {

@@ -11,7 +11,7 @@ import {
   login,
   logout,
   updateUser,
-} from "../controllers/user.controller.js";
+} from "../controller/user.controller.js";
 
 let router = Router();
 

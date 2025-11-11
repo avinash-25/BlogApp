@@ -1,7 +1,7 @@
 import expressAsyncHandler from "express-async-handler";
-import userModel from "../models/user.model.js";
+import userModel from "../Module/user.model.js";
 import CustomError from "../utils/CustomError.js";
-import { generateToken } from "../utils/jwt.util.js";
+import { generateToken } from "../utils/jwt.utils.js";
 
 export const addUser = async (req, res, next) => {
   try {

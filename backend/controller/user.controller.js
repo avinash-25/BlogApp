@@ -3,6 +3,8 @@ import userModel from "../Module/user.model.js";
 import CustomError from "../utils/CustomError.js";
 import { generateToken } from "../utils/jwt.utils.js";
 
+//! Add User
+
 export const addUser = async (req, res, next) => {
   try {
     const { email, password, name } = req.body;
@@ -119,6 +121,9 @@ export const login = expressAsyncHandler(async (req, res, next) => {
 
     //! explicit
     next(new CustomError("Password did not match", 401));
+    // return res
+    //   .status(401)
+    //   .json({ success: false, message: "Password did not match" });
   }
 
   let token = generateToken(existingUser._id);

@@ -1,5 +1,5 @@
 //! global error middleware
-const errorMiddleware = (err, req, res, next) => {
+export const errorMiddleware = (err, req, res, next) => {
   let statusCode = err.statusCode || 500;
   let message = err.message || "something went wrong";
 
@@ -17,9 +17,13 @@ const errorMiddleware = (err, req, res, next) => {
     statusCode = 400;
     message = "Invalid id";
   }
+
+  if (err.name === "JsonWebTokenError") {
+    statusCode = 401;
+    message = "Invalid Session, Please login again";
+  }
+
   res.status(statusCode).json({ success: false, message, errObj: err });
 };
-
-export default errorMiddleware;
 
 //! use this error middleware in the last

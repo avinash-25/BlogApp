@@ -1,5 +1,5 @@
 //! global error middleware
-export const errorMiddleware = (err, req, res, next) => {
+const errorMiddleware = (err, req, res, next) => {
   let statusCode = err.statusCode || 500;
   let message = err.message || "something went wrong";
 
@@ -25,5 +25,7 @@ export const errorMiddleware = (err, req, res, next) => {
 
   res.status(statusCode).json({ success: false, message, errObj: err });
 };
+
+export default errorMiddleware;
 
 //! use this error middleware in the last

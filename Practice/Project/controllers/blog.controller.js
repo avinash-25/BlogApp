@@ -81,3 +81,27 @@ export const deleteBlog = asyncHander(async (req, res) => {
         message: "Blog Deleted Successfully"
     })
 })
+
+
+//^ Update blog ( title, description)
+
+export const updateBlog = asyncHander(async (req, res) => {
+    const id = req.params.id;
+
+    if (!id) res.status(400).json({message: "Blog id is required"})
+
+    const { title, description } = req.body;
+    
+    const updatedBlog = await blogModel.findByIdAndUpdate(
+        id,
+        { title, description },
+        { new: true }
+    );
+
+    if (!updatedBlog) return res.status(404).json({ message: "Blog not found" });
+
+    res.status(200).json({
+        message: "Blog updated successfully",
+        blog: updateBlog
+    })
+})

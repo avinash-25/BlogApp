@@ -4,7 +4,8 @@ import asyncHander from 'express-async-handler';
 //^ Add blog
 
 export const addBlog = asyncHander(async (req, res) => {
-    const { Author, title, description } = req.body;
+    // try {
+        const { Author, title, description } = req.body;
 
     if (!Author || !title || !description) {
         res.status(400);
@@ -22,6 +23,9 @@ export const addBlog = asyncHander(async (req, res) => {
         message: "Blog added successfully",
         newBlog
     });
+    // } catch (error) {
+    //    next(err)
+    // }
 });
 
 //^ Get Single Blog (By ID)

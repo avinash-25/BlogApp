@@ -107,6 +107,3 @@ export const updateBlog = asyncHander(async (req, res) => {
         blog: updateBlog
     })
 })
-
-
-//^ code
